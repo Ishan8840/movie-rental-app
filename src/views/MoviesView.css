@@ -1,0 +1,30 @@
+.movies-view-container {
+  display: flex;
+  height: 100%;
+  background: #151515;
+}
+
+.sidebar {
+  flex: 1;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.main-content {
+  display: flex;
+  flex: 4;
+  padding: 10px;
+}
+
+.genre-view {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-right: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.detail-view {
+  flex: 3;
+  padding-left: 10px;
+}

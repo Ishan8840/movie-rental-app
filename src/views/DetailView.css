@@ -1,0 +1,60 @@
+.detail-view-container {
+  padding: 60px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #151515;
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.detail-view-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fffefe;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.detail-view-poster {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detail-info {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.detail-info span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.trailer-section {
+  margin-top: 40px;
+  text-align: center;
+  color: #007bff;
+}
+
+.trailer-text {
+  margin-bottom: 5px;
+}
+
+.trailer-section iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

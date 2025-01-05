@@ -1,0 +1,15 @@
+footer {
+  width: 100%;
+  height: 60px;
+  background: rgb(60, 57, 57);
+  color: rgb(255, 255, 255);
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.foot:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

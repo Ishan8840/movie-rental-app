@@ -1,0 +1,13 @@
+.error-container {
+  height: 100vh;
+  background-color: #1f1f1f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-title {
+  color: rgb(0, 25, 181);
+  font-size: 2rem;
+  font-family: Arial, sans-serif;
+}

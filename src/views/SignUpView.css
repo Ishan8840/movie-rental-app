@@ -1,0 +1,238 @@
+.logo-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 20px 20px;
+}
+
+.sign-up-page {
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/src/imgs/background.jpg);
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  position: relative;
+}
+
+.sign-up {
+  width: 95%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.sign-up h2 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.sign-up form {
+  margin: 20px 0;
+}
+
+form .info {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.info input {
+  width: 92%;
+  max-width: 390px;
+  height: 45px;
+  background: #333;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 0px 15px;
+  transition: all 0.2s ease, transform 0.2s ease;
+}
+
+.info input:focus {
+  background: #444;
+  outline: none;
+  transform: scale(1.02);
+}
+
+.info input:is(:focus, :valid) {
+  padding: 14px 15px 0;
+}
+
+.info label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  color: #8c8c8c;
+  pointer-events: none;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease, font-size 0.2s ease;
+}
+
+.info input:is(:focus, :valid)~label {
+  transform: translateY(-130%);
+  font-size: 0.75rem;
+}
+
+form .sign-up-btn {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1rem;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  margin: 15px 0 10px;
+  background: rgb(0, 25, 181);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+form .sign-up-btn:hover {
+  background: rgb(0, 16, 122);
+  transform: scale(1.03);
+}
+
+form .help {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form .help a {
+  font-size: 0.9rem;
+  color: #b3b3b3;
+  text-decoration: none;
+}
+
+form .help a:hover {
+  text-decoration: underline;
+}
+
+.sign-up p {
+  text-align: center;
+  color: #b3b3b3;
+}
+
+.sign-up p a {
+  color: #fff;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.sign-up p a:hover {
+  text-decoration: underline;
+}
+
+.genre-select-container {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.genre-select-container h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.genres-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.genre-select-button {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #444, #222);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4), -2px -2px 5px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.genre-select-button:hover {
+  background: linear-gradient(145deg, #555, #333);
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5), -3px -3px 7px rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.genre-select-button.selected {
+  background: linear-gradient(145deg, rgb(0, 25, 181), rgb(0, 16, 122));
+  color: #fff;
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5), -3px -3px 7px rgba(0, 16, 122, 0.5);
+  transform: scale(1.08);
+}
+
+.genre-select-button.selected:hover {
+  background: linear-gradient(145deg, rgb(0, 30, 200), rgb(0, 20, 140));
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(0, 20, 140, 0.6);
+}
+
+@media (max-width: 740px) {
+  .sign-up {
+    padding: 15px;
+  }
+
+  .sign-up h2 {
+    font-size: 1.6rem;
+  }
+
+  .info input {
+    font-size: 0.85rem;
+    padding: 0 10px;
+  }
+
+  .info label {
+    font-size: 0.8rem;
+  }
+
+  .genre-select-container h3 {
+    font-size: 1.2rem;
+  }
+
+  .genre-select-button {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+  .sign-up-btn {
+    font-size: 0.95rem;
+    padding: 12px 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .genres-grid {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 5px;
+  }
+
+  .sign-up {
+    padding: 10px;
+  }
+
+  .genre-select-button {
+    font-size: 0.7rem;
+    padding: 5px 6px;
+  }
+}

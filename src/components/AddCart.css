@@ -1,0 +1,43 @@
+.add-to-cart-button.detail-view {
+  background-color: #007bff;
+  border: none;
+  margin-bottom: 0px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.add-to-cart-button.detail-view:hover {
+  background-color: #024d9c;
+}
+
+.add-to-cart-button.feature {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 40px;
+  color: rgb(0, 0, 0);
+  transition: opacity 0.3s ease-in-out;
+  padding: 8px 15px;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  opacity: 0;
+  z-index: 2;
+}
+
+.feature-list-item:hover .add-to-cart-button.feature {
+  opacity: 1;
+}
+
+.add-to-cart-button.feature:hover {
+  background-color: gray;
+  cursor: pointer;
+}
