@@ -7,7 +7,7 @@ function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  const { signedIn, setSignedIn, firstName, lastName } = useStoreContext();
+  const { signedIn, setSignedIn, user, setUser } = useStoreContext();
 
   return (
     <div className="navbar">
@@ -32,10 +32,10 @@ function Header() {
           </ul>
         </div>
 
-        {signedIn ? (
+        {user ? (
           <>
             <div className="welcome-container">
-              <p>Welcome, {firstName} {lastName}</p>
+              <p>Welcome, {user.displayName}</p>
             </div>
           </>
         ) : (
@@ -52,7 +52,7 @@ function Header() {
           </form>
         </div>
 
-        {signedIn ? (
+        {user ? (
           <>
             <div className="sign-in-container">
               <div className="sign-in-button-container">
@@ -64,7 +64,7 @@ function Header() {
                     navigate("/cart");
                   }}
                 >
-                  <i class="fa-solid fa-cart-shopping"></i>
+                  <i className="fa-solid fa-cart-shopping"></i>
                 </a>
               </div>
             </div>
@@ -89,9 +89,8 @@ function Header() {
                   className="signin-btn"
                   onClick={(e) => {
                     e.preventDefault();
-                    setSignedIn(false);
                     navigate("/signin");
-
+                    setUser(null);
                   }}
                 >
                   Logout

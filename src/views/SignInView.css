@@ -40,7 +40,7 @@
 }
 
 .sign-in form {
-  margin: 25px 0 40px;
+  margin: 25px 0 10px;
 }
 
 form .info {
@@ -82,7 +82,7 @@ form .info {
   font-size: 0.75rem;
 }
 
-form .sign-in-btn {
+.sign-in-btn {
   width: 100%;
   padding: 16px 0;
   font-size: 1rem;
@@ -90,13 +90,13 @@ form .sign-in-btn {
   color: #fff;
   font-weight: 500;
   border-radius: 4px;
-  margin: 20px 0 10px;
+  margin: 5px 0 10px;
   background: rgb(0, 25, 181);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-form .sign-in-btn:hover {
+.sign-in-btn:hover {
   background: rgb(0, 16, 122);
 }
 

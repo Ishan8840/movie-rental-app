@@ -37,7 +37,7 @@
 }
 
 .sign-up form {
-  margin: 20px 0;
+  margin: 5px 0;
 }
 
 form .info {
@@ -84,7 +84,7 @@ form .info {
   font-size: 0.75rem;
 }
 
-form .sign-up-btn {
+.sign-up-btn {
   width: 100%;
   padding: 14px 0;
   font-size: 1rem;
@@ -92,34 +92,19 @@ form .sign-up-btn {
   color: #fff;
   font-weight: 500;
   border-radius: 4px;
-  margin: 15px 0 10px;
+  margin: 5px 0;
   background: rgb(0, 25, 181);
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-form .sign-up-btn:hover {
+.sign-up-btn:hover {
   background: rgb(0, 16, 122);
   transform: scale(1.03);
 }
 
-form .help {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-form .help a {
-  font-size: 0.9rem;
-  color: #b3b3b3;
-  text-decoration: none;
-}
-
-form .help a:hover {
-  text-decoration: underline;
-}
-
 .sign-up p {
+  margin-top: 5px;
   text-align: center;
   color: #b3b3b3;
 }

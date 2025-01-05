@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStoreContext } from '../context/Context';
-import { Map } from 'immutable';
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../firebase";
 import './SignUpView.css';
 
 function SignUpView() {
@@ -14,7 +15,7 @@ function SignUpView() {
   const [confirmPass, setConfirmPass] = useState('');
   const [selectedGenres, setSelectedGenres] = useState([]);
 
-  const { setEmail, setPass, setFirstName, setLastName, setGenres, setCart } = useStoreContext();
+  const { setGenres, setUser } = useStoreContext();
 
   const genres = [
     { id: 28, name: 'Action' },
@@ -42,24 +43,45 @@ function SignUpView() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const registerByEmail = async (event) => {
     event.preventDefault();
 
     if (passInput !== confirmPass) {
       alert("Password Don't Match");
-    } else if (selectedGenres.length < 10) {
-      alert("Select at least 10 genres");
-    } else {
-      setEmail(emailInput);
-      setPass(passInput);
-      setFirstName(firstNameInput);
-      setLastName(lastNameInput);
-      setGenres(selectedGenres);
-      setCart(Map());
+      return;
+    }
 
-      navigate('/signin');
+    if (selectedGenres.length < 10) {
+      alert("Select at least 10 genres");
+      return;
+    }
+
+    try {
+      const user = (await createUserWithEmailAndPassword(auth, emailInput, passInput)).user;
+      await updateProfile(user, { displayName: `${firstNameInput} ${lastNameInput}` });
+      setUser(user);
+      setGenres(selectedGenres);
+      navigate('/movies');
+    } catch (error) {
+      alert(error);
     }
   };
+
+  const registerByGoogle = async () => {
+    if (selectedGenres.length < 10) {
+      alert("Select at least 10 genres");
+      return;
+    }
+
+    try {
+      const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
+      setUser(user);
+      setGenres(selectedGenres);
+      navigate('/movies');
+    } catch {
+      alert(("Error creating user with email and password!"));
+    }
+  }
 
   return (
     <div>
@@ -69,7 +91,7 @@ function SignUpView() {
       <div className="sign-up-page">
         <div className="sign-up">
           <h2>SIGN UP</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => registerByEmail(e)}>
             <div className="info">
               <input type="text" name="first" onChange={(e) => setFirstNameInput(e.target.value)} required />
               <label>First Name</label>
@@ -106,13 +128,11 @@ function SignUpView() {
                 ))}
               </div>
             </div>
-
             <button className="sign-up-btn" type="submit">Sign Up</button>
-            <div className="help">
-              <Link to="#">Need help?</Link>
-            </div>
           </form>
+          <button className="sign-up-btn" onClick={() => registerByGoogle()}>Sign Up With Google</button>
           <p>Already Have An Account? <Link to="/signin">Sign In</Link></p>
+
         </div>
       </div>
     </div>

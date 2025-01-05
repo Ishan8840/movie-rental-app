@@ -5,10 +5,10 @@ import './SettingsView.css';
 
 function SettingsView() {
   const navigate = useNavigate();
-  const { firstName, lastName, email, genres, setFirstName, setLastName, setGenres } = useStoreContext();
+  const { user, setUser, genres, setGenres } = useStoreContext();
 
-  const [firstNameInput, setFirstNameInput] = useState(firstName);
-  const [lastNameInput, setLastNameInput] = useState(lastName);
+  const [firstNameInput, setFirstNameInput] = useState(user.displayName.split(' ')[0]);
+  const [lastNameInput, setLastNameInput] = useState(user.displayName.split(' ')[1]);
   const [selectedGenres, setSelectedGenres] = useState(genres || []);
 
   const availableGenres = [
@@ -37,15 +37,20 @@ function SettingsView() {
     }
   };
 
-  const handleSave = (e) => {
+  const updateProfile = async (user, updatedData) => {
+    return Promise.resolve(updatedData);
+  };
+
+  const handleSave = async (e) => {
     e.preventDefault();
     if (selectedGenres.length < 10) {
       alert("Select at least 10 genres");
     } else {
-      setFirstName(firstNameInput);
-      setLastName(lastNameInput);
-      setGenres(selectedGenres);
+      const updatedUser = { ...user, displayName: `${firstNameInput} ${lastNameInput}` };
+      await updateProfile(updatedUser, { displayName: `${firstNameInput} ${lastNameInput}` });
 
+      setGenres(selectedGenres);
+      setUser(updatedUser);
       navigate('/');
       alert("Settings Saved");
     }
@@ -78,7 +83,7 @@ function SettingsView() {
             <label>New Last Name</label>
           </div>
           <div className="email-container">
-            <input type="text" value={email} readOnly />
+            <input type="text" value={user.email} readOnly />
             <label>Email</label>
           </div>
           <div className="genre-select-container">

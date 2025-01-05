@@ -4,16 +4,12 @@ import { Map } from 'immutable';
 const StoreContext = createContext();
 
 export const StoreProvider = ({ children }) => {
-  const [signedIn, setSignedIn] = useState(false);
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [user, setUser] = useState(null);
   const [genres, setGenres] = useState([]);
   const [cart, setCart] = useState(Map());
 
   return (
-    <StoreContext.Provider value={{ cart, setCart, email, setEmail, pass, setPass, genres, setGenres, firstName, setFirstName, lastName, setLastName, signedIn, setSignedIn }}>
+    <StoreContext.Provider value={{ cart, setCart, genres, setGenres, user, setUser }}>
       {children}
     </StoreContext.Provider>
   );

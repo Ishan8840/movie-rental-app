@@ -4,10 +4,10 @@ import '../components/AddCart.css';
 
 function AddToCartButton({ movie, variant }) {
   const navigate = useNavigate();
-  const { cart, setCart, signedIn } = useStoreContext();
+  const { cart, setCart, user } = useStoreContext();
 
   const handleAddToCart = () => {
-    if (signedIn) {
+    if (user) {
       const updatedCart = cart.has(movie.id)
         ? cart.delete(movie.id)
         : cart.set(movie.id, movie);
