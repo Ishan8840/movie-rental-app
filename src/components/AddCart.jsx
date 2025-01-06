@@ -8,10 +8,12 @@ function AddToCartButton({ movie, variant }) {
 
   const handleAddToCart = () => {
     if (user) {
-      const updatedCart = cart.has(movie.id)
+      const newCart = cart.has(movie.id)
         ? cart.delete(movie.id)
         : cart.set(movie.id, movie);
-      setCart(updatedCart);
+
+      localStorage.setItem(user.uid, JSON.stringify(newCart.toJS()));
+      setCart(newCart);
     } else {
       navigate('/signin');
     }

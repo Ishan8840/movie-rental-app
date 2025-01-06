@@ -6,7 +6,16 @@ import "./CartView.css";
 
 function CartView() {
   const navigate = useNavigate();
-  const { cart, setCart } = useStoreContext();
+  const { cart, setCart, user } = useStoreContext();
+
+  const removeMovie = (key) => {
+    setCart((prevCart) => {
+      const newCart = prevCart.delete(key);
+      localStorage.setItem(user.uid, JSON.stringify(newCart.toJS()));
+      return newCart;
+    });
+  };
+
 
   return (
     <div className="cart-view">
@@ -29,9 +38,9 @@ function CartView() {
                   </p>
                   <button
                     className="remove-button"
-                    onClick={() => setCart((prevCart) => prevCart.delete(key))}
+                    onClick={() => removeMovie(key)}
                   >
-                    <i class="fa-solid fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                   </button>
                 </div>
               </div>
