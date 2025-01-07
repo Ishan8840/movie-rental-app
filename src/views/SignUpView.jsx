@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useStoreContext } from '../context/Context';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, firestore } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 import './SignUpView.css';
 
 function SignUpView() {
@@ -61,6 +62,8 @@ function SignUpView() {
       await updateProfile(user, { displayName: `${firstNameInput} ${lastNameInput}` });
       setUser(user);
       setGenres(selectedGenres);
+      const docRef = doc(firestore, "users", user.uid);
+      await setDoc(docRef, { genres: selectedGenres });
       navigate('/movies');
     } catch (error) {
       alert(error);
@@ -77,6 +80,8 @@ function SignUpView() {
       const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
       setUser(user);
       setGenres(selectedGenres);
+      const docRef = doc(firestore, "users", user.uid);
+      await setDoc(docRef, { genres: selectedGenres });
       navigate('/movies');
     } catch {
       alert(("Error creating user with email and password!"));

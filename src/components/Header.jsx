@@ -2,12 +2,24 @@ import "./Header.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStoreContext } from "../context/Context";
+import { auth } from "../firebase";
+import { signOut } from 'firebase/auth';
+
 
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  const { signedIn, setSignedIn, user, setUser } = useStoreContext();
+  const { user, setUser } = useStoreContext();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   return (
     <div className="navbar">
@@ -85,13 +97,9 @@ function Header() {
             <div className="sign-in-container">
               <div className="sign-in-button-container">
                 <a
-                  href="/logout"
+                  href="/signin"
                   className="signin-btn"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate("/signin");
-                    setUser(null);
-                  }}
+                  onClick={handleLogout}
                 >
                   Logout
                 </a>

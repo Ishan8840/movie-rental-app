@@ -14,7 +14,6 @@ export const StoreProvider = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, user => {
-      console.log("Auth state changed:", user);
       if (user) {
         setUser(user);
         const sessionCart = localStorage.getItem(user.uid);
