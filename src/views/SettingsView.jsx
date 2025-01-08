@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useStoreContext } from '../context/Context';
 import { useNavigate, Link } from 'react-router-dom';
+import { auth, firestore } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
 import './SettingsView.css';
 
 function SettingsView() {
@@ -50,6 +52,8 @@ function SettingsView() {
       await updateProfile(updatedUser, { displayName: `${firstNameInput} ${lastNameInput}` });
 
       setGenres(selectedGenres);
+      const docRef = doc(firestore, "users", user.uid);
+      await setDoc(docRef, { genres: selectedGenres });
       setUser(updatedUser);
       navigate('/');
       alert("Settings Saved");

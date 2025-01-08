@@ -11,6 +11,7 @@ export const StoreProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [genres, setGenres] = useState([]);
   const [cart, setCart] = useState(Map());
+  const [purchases, setPurchases] = useState(Map());
   const [loading, setLoading] = useState(true);
 
 
