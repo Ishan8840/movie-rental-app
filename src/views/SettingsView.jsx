@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useStoreContext } from '../context/Context';
 import { useNavigate, Link } from 'react-router-dom';
+import { updateProfile } from "firebase/auth";
+
 import { auth, firestore } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import './SettingsView.css';
@@ -31,6 +33,9 @@ function SettingsView() {
     { id: 878, name: 'Sci-Fi' },
   ];
 
+  const isGoogleUser = user.providerData.some(profile => profile.providerId === 'google.com');
+
+
   const handleGenreClick = (id, name) => {
     if (selectedGenres.some((availableGenre) => availableGenre.id === id)) {
       setSelectedGenres(selectedGenres.filter((availableGenre) => availableGenre.id !== id));
@@ -39,17 +44,13 @@ function SettingsView() {
     }
   };
 
-  const updateProfile = async (user, updatedData) => {
-    return Promise.resolve(updatedData);
-  };
-
   const handleSave = async (e) => {
     e.preventDefault();
     if (selectedGenres.length < 10) {
       alert("Select at least 10 genres");
     } else {
       const updatedUser = { ...user, displayName: `${firstNameInput} ${lastNameInput}` };
-      await updateProfile(updatedUser, { displayName: `${firstNameInput} ${lastNameInput}` });
+      await updateProfile(auth.currentUser, { displayName: updatedUser.displayName });
 
       setGenres(selectedGenres);
       const docRef = doc(firestore, "users", user.uid);
@@ -68,21 +69,23 @@ function SettingsView() {
       <div className="sign-up">
         <h2>Settings</h2>
         <form onSubmit={handleSave}>
-          <div className="info">
+          <div className={isGoogleUser ? 'email-container' : 'info'}>
             <input
               type="text"
               value={firstNameInput}
               onChange={(e) => setFirstNameInput(e.target.value)}
-              required
+              required={isGoogleUser}
+              readOnly={isGoogleUser}
             />
             <label>New First Name</label>
           </div>
-          <div className="info">
+          <div className={isGoogleUser ? 'email-container' : 'info'}>
             <input
               type="text"
               value={lastNameInput}
               onChange={(e) => setLastNameInput(e.target.value)}
-              required
+              required={isGoogleUser}
+              readOnly={isGoogleUser}
             />
             <label>New Last Name</label>
           </div>
