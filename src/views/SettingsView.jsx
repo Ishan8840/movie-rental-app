@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useStoreContext } from '../context/Context';
 import { useNavigate, Link } from 'react-router-dom';
-import { updateProfile } from "firebase/auth";
+import { updateProfile, updatePassword } from "firebase/auth";
 
 import { auth, firestore } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
@@ -13,6 +13,8 @@ function SettingsView() {
 
   const [firstNameInput, setFirstNameInput] = useState(user.displayName.split(' ')[0]);
   const [lastNameInput, setLastNameInput] = useState(user.displayName.split(' ')[1]);
+  const [passInput, setPassInput] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
   const [selectedGenres, setSelectedGenres] = useState(genres || []);
 
   const availableGenres = [
@@ -46,16 +48,27 @@ function SettingsView() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (selectedGenres.length < 10) {
+    if (passInput !== confirmPass) {
+      alert("Password Don't Match");
+      return;
+    } else if (selectedGenres.length < 10) {
       alert("Select at least 10 genres");
     } else {
-      const updatedUser = { ...user, displayName: `${firstNameInput} ${lastNameInput}` };
-      await updateProfile(auth.currentUser, { displayName: updatedUser.displayName });
+      if (!isGoogleUser) {
+        try {
+          const updatedUser = { ...user, displayName: `${firstNameInput} ${lastNameInput}` };
+          await updateProfile(auth.currentUser, { displayName: updatedUser.displayName });
+          await updatePassword(user, passInput);
+          setUser(updatedUser);
+        } catch (error) {
+          alert(error);
+          return;
+        }
+      }
 
       setGenres(selectedGenres);
       const docRef = doc(firestore, "users", user.uid);
       await setDoc(docRef, { genres: selectedGenres });
-      setUser(updatedUser);
       navigate('/');
       alert("Settings Saved");
     }
@@ -93,7 +106,19 @@ function SettingsView() {
             <input type="text" value={user.email} readOnly />
             <label>Email</label>
           </div>
-          <div className="genre-select-container">
+          {!isGoogleUser && (
+            <div>
+              <div className="info">
+                <input type="password" name="password" onChange={(e) => setPassInput(e.target.value)} />
+                <label>New Password</label>
+              </div>
+              <div className="info">
+                <input type="password" name="confirmPassword" onChange={(e) => setConfirmPass(e.target.value)} />
+                <label>Confirm New Password</label>
+              </div>
+            </div>
+          )}
+          < div className="genre-select-container">
             <h3>Select Your Favorite Genres</h3>
             <div className="genres-grid">
               {availableGenres.map((availableGenre) => (
@@ -112,8 +137,8 @@ function SettingsView() {
             Save Changes
           </button>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
