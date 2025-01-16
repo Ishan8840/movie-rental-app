@@ -4,18 +4,33 @@ import '../components/AddCart.css';
 
 function AddToCartButton({ movie, variant }) {
   const navigate = useNavigate();
-  const { cart, setCart, user } = useStoreContext();
+  const { cart, setCart, user, purchases } = useStoreContext();
 
   const handleAddToCart = () => {
     if (user) {
-      const newCart = cart.has(movie.id)
-        ? cart.delete(movie.id)
-        : cart.set(movie.id, movie);
+      if (purchases.has(movie.id)) {
+        return
+      } else {
+        const newCart = cart.has(movie.id)
+          ? cart.delete(movie.id)
+          : cart.set(movie.id, movie);
 
-      localStorage.setItem(user.uid, JSON.stringify(newCart.toJS()));
-      setCart(newCart);
+        localStorage.setItem(user.uid, JSON.stringify(newCart.toJS()));
+        setCart(newCart);
+      }
+
     } else {
       navigate('/signin');
+    }
+  };
+
+  const buttonText = () => {
+    if (cart.has(movie.id)) {
+      return "Added";
+    } else if (purchases.has(movie.id)) {
+      return "Purchased";
+    } else {
+      return "Add To Cart";
     }
   };
 
@@ -24,7 +39,7 @@ function AddToCartButton({ movie, variant }) {
       onClick={handleAddToCart}
       className={`add-to-cart-button ${variant ? variant : ""}`}
     >
-      {cart.has(movie.id) ? "Added" : "Add to Cart"}
+      {buttonText()}
     </button>
   );
 }

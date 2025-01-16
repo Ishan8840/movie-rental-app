@@ -14,7 +14,6 @@ export const StoreProvider = ({ children }) => {
   const [purchases, setPurchases] = useState(Map());
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -30,8 +29,11 @@ export const StoreProvider = ({ children }) => {
           if (docSnap.exists()) {
             const fetchedGenres = docSnap.data().genres;
             setGenres(fetchedGenres);
+            const fetchedPurchases = Map(docSnap.data().purchases);
+            setPurchases(fetchedPurchases);
           } else {
             setGenres([]);
+            setPurchases(Map());
           }
         } catch (error) {
           console.log("Error fetching genres:", error);
@@ -50,7 +52,7 @@ export const StoreProvider = ({ children }) => {
   }
 
   return (
-    <StoreContext.Provider value={{ cart, setCart, genres, setGenres, user, setUser }}>
+    <StoreContext.Provider value={{ cart, setCart, genres, setGenres, user, setUser, purchases, setPurchases }}>
       {children}
     </StoreContext.Provider>
   );

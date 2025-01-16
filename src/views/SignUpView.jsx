@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useStoreContext } from '../context/Context';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, firestore } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import './SignUpView.css';
 
 function SignUpView() {

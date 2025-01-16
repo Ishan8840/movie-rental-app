@@ -2,11 +2,13 @@ import { useStoreContext } from "../context/Context.jsx";
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer.jsx";
 import Header from "../components/Header.jsx";
+import { auth, firestore } from "../firebase";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import "./CartView.css";
 
 function CartView() {
   const navigate = useNavigate();
-  const { cart, setCart, user } = useStoreContext();
+  const { cart, setCart, user, setPurchases, purchases, genres } = useStoreContext();
 
   const removeMovie = (key) => {
     setCart((prevCart) => {
@@ -15,6 +17,24 @@ function CartView() {
       return newCart;
     });
   };
+
+  const purchaseMovie = async () => {
+
+    const updatedPurchases = purchases.merge(cart);
+
+    setPurchases(updatedPurchases);
+
+    try {
+      const docRef = doc(firestore, "users", user.uid);
+      await setDoc(docRef, { purchases: updatedPurchases.toJS(), genres: genres, });
+      const clearedCart = cart.clear();
+      setCart(clearedCart);
+      localStorage.setItem(user.uid, JSON.stringify(clearedCart.toJS()));
+    } catch (error) {
+      alert(error);
+    }
+  };
+
 
   return (
     <div className="cart-view">
@@ -52,8 +72,8 @@ function CartView() {
 
       {cart.size > 0 && (
         <div className="checkout-container">
-          <button className="checkout-button">
-            Proceed to Checkout
+          <button className="checkout-button" onClick={purchaseMovie}>
+            Checkout
           </button>
         </div>
       )}

@@ -9,7 +9,7 @@ import './SettingsView.css';
 
 function SettingsView() {
   const navigate = useNavigate();
-  const { user, setUser, genres, setGenres } = useStoreContext();
+  const { user, setUser, genres, setGenres, purchases } = useStoreContext();
 
   const [firstNameInput, setFirstNameInput] = useState(user.displayName.split(' ')[0]);
   const [lastNameInput, setLastNameInput] = useState(user.displayName.split(' ')[1]);
@@ -67,8 +67,9 @@ function SettingsView() {
       }
 
       setGenres(selectedGenres);
+      const validPurchases = purchases ? purchases.toJS() : [];
       const docRef = doc(firestore, "users", user.uid);
-      await setDoc(docRef, { genres: selectedGenres });
+      await setDoc(docRef, { purchases: validPurchases, genres: selectedGenres, });
       navigate('/');
       alert("Settings Saved");
     }
