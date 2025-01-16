@@ -139,6 +139,26 @@ function SettingsView() {
           </button>
         </form>
       </div >
+      <div className="cart-items">
+        {
+          purchases.entrySeq().map(([key, value]) => (
+            <div className="cart-item" key={key}>
+              <img
+                className="cart-item-img"
+                src={`https://image.tmdb.org/t/p/w500${value.poster_path}`}
+                alt={value.title}
+                onClick={() => navigate(`/movies/details/${value.id}`)}
+              />
+              <div className="cart-item-details">
+                <h2 className="cart-item-title">{value.title}</h2>
+                <p className="cart-item-description">
+                  {value.overview}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div >
   );
 }
