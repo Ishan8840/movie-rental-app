@@ -21,7 +21,6 @@ function CartView() {
   const purchaseMovie = async () => {
 
     const updatedPurchases = purchases.merge(cart);
-
     setPurchases(updatedPurchases);
 
     try {
@@ -33,6 +32,7 @@ function CartView() {
     } catch (error) {
       alert(error);
     }
+    alert("Movies Purchased!");
   };
 
 
