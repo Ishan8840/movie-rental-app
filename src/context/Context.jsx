@@ -16,7 +16,7 @@ export const StoreProvider = ({ children }) => {
 
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
         const sessionCart = localStorage.getItem(user.uid);
@@ -28,7 +28,7 @@ export const StoreProvider = ({ children }) => {
         try {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            const fetchedGenres = docSnap.data().genres || [];
+            const fetchedGenres = docSnap.data().genres;
             setGenres(fetchedGenres);
           } else {
             setGenres([]);
@@ -39,14 +39,11 @@ export const StoreProvider = ({ children }) => {
       }
       setLoading(false);
     });
-
-    return () => unsubscribe();
   }, []);
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
+      <div>
         <h1 className="loading-title">Loading...</h1>
       </div>
     )

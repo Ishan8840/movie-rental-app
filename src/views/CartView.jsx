@@ -16,7 +16,6 @@ function CartView() {
     });
   };
 
-
   return (
     <div className="cart-view">
       <Header />
