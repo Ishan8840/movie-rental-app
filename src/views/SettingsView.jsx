@@ -58,7 +58,7 @@ function SettingsView() {
         try {
           const updatedUser = { ...user, displayName: `${firstNameInput} ${lastNameInput}` };
           await updateProfile(auth.currentUser, { displayName: updatedUser.displayName });
-          await updatePassword(user, passInput);
+          await updatePassword(auth.currentUser, passInput);
           setUser(updatedUser);
         } catch (error) {
           alert(error);

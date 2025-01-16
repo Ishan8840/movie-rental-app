@@ -8,12 +8,12 @@ function AddToCartButton({ movie, variant }) {
 
   const handleAddToCart = () => {
     if (user) {
-      if (purchases.has(movie.id)) {
+      if (purchases.has(String(movie.id))) {
         return
       } else {
-        const newCart = cart.has(movie.id)
-          ? cart.delete(movie.id)
-          : cart.set(movie.id, movie);
+        const newCart = cart.has(String(movie.id))
+          ? cart.delete(String(movie.id))
+          : cart.set(String(movie.id), movie);
 
         localStorage.setItem(user.uid, JSON.stringify(newCart.toJS()));
         setCart(newCart);
@@ -25,9 +25,9 @@ function AddToCartButton({ movie, variant }) {
   };
 
   const buttonText = () => {
-    if (cart.has(movie.id)) {
+    if (cart.has(String(movie.id))) {
       return "Added";
-    } else if (purchases.has(movie.id)) {
+    } else if (purchases.has(String(movie.id))) {
       return "Purchased";
     } else {
       return "Add To Cart";
