@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useStoreContext } from '../context/Context';
 import { useNavigate, Link } from 'react-router-dom';
 import { updateProfile, updatePassword } from "firebase/auth";
-
 import { auth, firestore } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import './SettingsView.css';

@@ -20,7 +20,6 @@ function SignInView() {
       navigate('/movies');
       setUser(user);
     } catch (error) {
-      console.log(error);
       alert(error);
     }
   }
@@ -31,7 +30,6 @@ function SignInView() {
       navigate('/movies');
       setUser(user);
     } catch (error) {
-      console.log(error);
       alert("Error signing in!");
     }
   }

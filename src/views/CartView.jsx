@@ -32,7 +32,7 @@ function CartView() {
     } catch (error) {
       alert(error);
     }
-    alert("Movies Purchased!");
+    alert('Movies Purchased!');
   };
 
 
