@@ -101,3 +101,43 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 556px) {
+  .feature-list-item {
+    display: none;
+  }
+
+  .feature-list-item:nth-child(1) {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 557px) and (max-width: 776px) {
+  .feature-list-item {
+    display: none;
+  }
+
+  .feature-list-item:nth-child(-n+2) {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 777px) and (max-width: 996px) {
+  .feature-list-item {
+    display: none;
+  }
+
+  .feature-list-item:nth-child(-n+3) {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 777px) and (max-width: 996px) {
+  .feature-list-item {
+    display: none;
+  }
+
+  .feature-list-item:nth-child(-n+3) {
+    display: block;
+  }
+}
