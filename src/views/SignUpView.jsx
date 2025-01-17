@@ -81,7 +81,7 @@ function SignUpView() {
       setUser(user);
       setGenres(selectedGenres);
       const docRef = doc(firestore, "users", user.uid);
-      await setDoc(docRef, { genres: selectedGenres });
+      await setDoc(docRef, { genres: selectedGenres, purchases: [] });
       navigate('/movies');
     } catch {
       alert(("Error creating user with email and password!"));

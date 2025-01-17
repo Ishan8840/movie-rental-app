@@ -3,7 +3,7 @@ import { useStoreContext } from '../context/Context';
 import { useNavigate, Link } from 'react-router-dom';
 import { updateProfile, updatePassword } from "firebase/auth";
 import { auth, firestore } from "../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import './SettingsView.css';
 
 function SettingsView() {
@@ -67,7 +67,7 @@ function SettingsView() {
       setGenres(selectedGenres);
       const validPurchases = purchases ? purchases.toJS() : [];
       const docRef = doc(firestore, "users", user.uid);
-      await setDoc(docRef, { purchases: validPurchases, genres: selectedGenres });
+      await updateDoc(docRef, { genres: selectedGenres, });
       navigate('/');
       alert("Settings Saved");
     }

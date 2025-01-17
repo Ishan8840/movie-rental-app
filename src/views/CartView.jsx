@@ -25,7 +25,7 @@ function CartView() {
 
     try {
       const docRef = doc(firestore, "users", user.uid);
-      await setDoc(docRef, { purchases: updatedPurchases.toJS(), genres: genres, });
+      await updateDoc(docRef, { purchases: updatedPurchases.toJS(), });
       const clearedCart = cart.clear();
       setCart(clearedCart);
       localStorage.setItem(user.uid, JSON.stringify(clearedCart.toJS()));
