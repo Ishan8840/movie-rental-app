@@ -2,8 +2,8 @@ import { useStoreContext } from "../context/Context.jsx";
 import { useNavigate } from "react-router";
 import Footer from "../components/Footer.jsx";
 import Header from "../components/Header.jsx";
-import { auth, firestore } from "../firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { firestore } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 import "./CartView.css";
 
 function CartView() {
