@@ -20,4 +20,6 @@ A fake movie rental web application using [TMDB API](https://www.themoviedb.org/
 
 ---
 
+<img width="941" height="435" alt="image" src="https://github.com/user-attachments/assets/5d9f23e8-32a1-4c1f-b592-f027447f4272" />
 
+<img width="512" height="389" alt="image" src="https://github.com/user-attachments/assets/7a248c81-8aee-462d-b6de-2258e6fd0b62" />
